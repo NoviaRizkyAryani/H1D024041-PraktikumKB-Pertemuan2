@@ -2,7 +2,7 @@
 import numpy as np
 import skfuzzy as fuzz
 from skfuzzy import control as ctrl
-import matplotlib.pyplot as plt  # ← tambah ini
+import matplotlib.pyplot as plt
 
 # menyiapkan himpunan fuzzy
 makanan = ctrl.Antecedent(np.arange(0,11), 'makanan')
@@ -24,6 +24,7 @@ nilai['Buruk'] = fuzz.trimf(nilai.universe, [0, 2, 4])
 nilai['Cukup'] = fuzz.trimf(nilai.universe, [3, 5, 7])
 nilai['Baik'] = fuzz.trimf(nilai.universe, [6, 8, 10])
 
+# rule base
 aturan1 = ctrl.Rule(makanan['TidakEnak'] & pelayanan['Ketus'],
 nilai['Buruk'])
 aturan2 = ctrl.Rule(makanan['Sedang'] | pelayanan['Biasa'],
@@ -39,9 +40,9 @@ system.input['pelayanan'] = 7
 system.compute()
 print(system.output['nilai'])
 
-# tampilkan grafik         ← tambahkan ini
+# tampilkan grafik 
 makanan.view()
 pelayanan.view()
-nilai.view(sim=system)     # sim=system supaya area hasil ikut ter-shaded
+nilai.view(sim=system)
 
-plt.show()  # ← tambah ini, gantiin input("Tekan ENTER...")
+plt.show()
